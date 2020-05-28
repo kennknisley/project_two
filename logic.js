@@ -1,3 +1,9 @@
+d3.csv("cleaned_restaurant_data.csv").then(function(csv) {
+  data = csv;
+  addRestaurantMarkers();
+});
+
+
 // define map variable
 var map = L.map('map');
 // define map tile layer and add to the map
@@ -8,6 +14,8 @@ var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.pn
     accessToken: API_KEY
   });
 streetmap.addTo(map);
+var sidebar = L.control.sidebar({ sidebar }).addTo(map);
+
 // set centerpoint and zoom of map
 map.setView([37.96, -91.83], 7);
 
@@ -20,7 +28,5 @@ function addRestaurantMarkers() {
     restaurantMarker.addTo(map);
   })
 }
-d3.csv("cleaned_restaurant_data.csv").then(function(csv) {
-  data = csv;
-  addRestaurantMarkers();
-});
+
+
