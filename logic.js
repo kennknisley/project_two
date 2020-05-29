@@ -1,16 +1,9 @@
+// read from csv
 var data;
 d3.csv("cleaned_restaurant_data_2.csv").then(function(csv) {
   data = csv;
   createFeatures();
 });
-
-// create sidebar
-var sidebar = L.control.sidebar({
-  autopan: false,
-  closeButton: true,
-  container: 'sidebar',
-  position: 'left'
-}).addTo(map);
 
 // function to add markers, popups, and sidebar
 function createFeatures() {
@@ -20,7 +13,7 @@ function createFeatures() {
       fillcolor: "blue",
       color: "blue",
       weight: 0.5,
-      //radius: 500
+      radius: 5
     }).bindPopup("<h3>" + d.name + "</h3>");
     restaurantMarker.on({
       click: function(event) {
@@ -28,7 +21,7 @@ function createFeatures() {
         restaurantInfo.innerHTML = d.address;
         var restaurantName = document.getElementById('restaurantname');
         restaurantName.innerHTML = d.name;
-        sidebar.open('home');
+        //sidebar.open('home');
         }
       }).addTo(markers);
   });
@@ -65,6 +58,15 @@ var map = L.map('map', {
 L.control.layers(baseMaps, overlayMaps, {
   collapsed: false
 }).addTo(map)
+
+// create sidebar
+var sidebar = L.control.sidebar({
+  autopan: false,
+  closeButton: true,
+  container: 'sidebar',
+  position: 'left'
+}).addTo(map);
+
 }
 
 
