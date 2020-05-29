@@ -26,20 +26,29 @@ var sidebar = L.control.sidebar({
   position: 'right'
 }).addTo(map);
 
-// add content to sidebar
-var panelContent = {
-  id: 'userinfo',
-  tab: '<i class="fa-gear"></i>',
-  title: 'Poverty Data',
-  Position: 'bottom'
-};
-sidebar.addPanel(panelContent);
+// // add content to sidebar
+// var panelContent = {
+//   id: 'userinfo',
+//   tab: '<i class="fa fa-bars"></i>',
+//   title: 'Data',
+//   Position: 'bottom'
+// };
+// sidebar.addPanel(panelContent);
 
 // add restaurant markers to map  
 var data;
 function addRestaurantMarkers() {
   data.forEach(function(d) {
     var restaurantMarker = L.marker([+d.latitude, +d.longitude]);
+    restaurantMarker.on({
+      click: function(event) {
+        var restaurantInfo = document.getElementById('restaurantinfo');
+        restaurantInfo.innerHTML = d.address;
+        var restaurantName = document.getElementById('restaurantname');
+        restaurantName.innerHTML = d.name;
+        sidebar.open('home');
+      }
+    });
     restaurantMarker.bindPopup("<h3>" + d.name + "</h3><h4>" + d.loopcheck  + "</h4>");
     restaurantMarker.addTo(map);
     //updateSidebarData();
