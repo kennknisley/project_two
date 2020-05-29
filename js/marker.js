@@ -34,9 +34,16 @@ function createMap(counties) {
       id: "mapbox.dark",
       accessToken: API_KEY
     });
+    var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.streets",
+    accessToken: API_KEY
+    });
   
     var baseMaps = {
-      "Dark Map": darkmap
+      "Dark Map": darkmap,
+      "Street Map":streetmap
     };
   
     var overlayMaps = {
@@ -116,8 +123,11 @@ function chooseColor(station){
       else if (unemp>8){
         return "#64bc61"
       }
-      else{
+      else if (unemp>1){
         return "#23964f"
+      }
+      else{
+        return "#000000"
       }
     
 
@@ -125,7 +135,8 @@ function chooseColor(station){
   
   function createMarkers(response) {
 
-    var stations = response.features
+    var stations = response.features;
+    stations=stations.filter(station=>station.properties.STATE==29);
   
     var countyMarkers = [];
   
@@ -133,7 +144,7 @@ function chooseColor(station){
       var station = stations[index];
   
       var countyMarker = L.geoJSON(station,{
-          style:{color:"orange",
+          style:{color:"black",
           fillOpacity:0.6,
           weight:0.3,
           fillColor: chooseColor(station.properties.NAME)},
