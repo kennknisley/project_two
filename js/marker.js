@@ -122,8 +122,6 @@ function chooseColor(station){
     
 
 }}}
-
-var restaurants;
   
   function createMarkers(response) {
 
@@ -135,11 +133,28 @@ var restaurants;
       var station = stations[index];
   
       var countyMarker = L.geoJSON(station,{
-          color:"orange",
+          style:{color:"orange",
           fillOpacity:0.6,
           weight:0.3,
-          fillColor: chooseColor(station.properties.NAME)
-      }).bindPopup(`<h4>${station.properties.NAME} County</h4>`);
+          fillColor: chooseColor(station.properties.NAME)},
+          onEachFeature: function(feature,layer){
+            layer.on({
+              mouseover:function(event){
+                layer=event.target;
+                layer.setStyle({
+                  fillOpacity:0.9
+                });
+              },
+              mouseout: function(event){
+                layer=event.target;
+                layer.setStyle({
+                  fillOpacity:0.6
+                });
+              }
+            });
+            layer.bindPopup(`<h4>${station.properties.NAME} County</h4>`);
+          }
+      })
   
       countyMarkers.push(countyMarker);
     }
