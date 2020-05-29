@@ -1,45 +1,27 @@
-d3.csv("cleaned_restaurant_data.csv").then(function(csv) {
+var data;
+d3.csv("cleaned_restaurant_data_2.csv").then(function(csv) {
   data = csv;
-  addRestaurantMarkers();
+  createFeatures();
 });
-
-
-// define map variable
-var map = L.map('map', {
-  center: [37.96, -91.83],
-  zoom: 7
-});
-// define map tile layer and add to the map
-var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    maxZoom: 18,
-    id: "mapbox.streets",
-    accessToken: API_KEY
-  });
-streetmap.addTo(map);
 
 // create sidebar
 var sidebar = L.control.sidebar({
   autopan: false,
   closeButton: true,
   container: 'sidebar',
-  position: 'right'
+  position: 'left'
 }).addTo(map);
 
-// // add content to sidebar
-// var panelContent = {
-//   id: 'userinfo',
-//   tab: '<i class="fa fa-bars"></i>',
-//   title: 'Data',
-//   Position: 'bottom'
-// };
-// sidebar.addPanel(panelContent);
-
-// add restaurant markers to map  
-var data;
-function addRestaurantMarkers() {
+// function to add markers, popups, and sidebar
+function createFeatures() {
+  var markers = L.layerGroup();
   data.forEach(function(d) {
-    var restaurantMarker = L.marker([+d.latitude, +d.longitude]);
+    var restaurantMarker = L.circleMarker([+d.latitude, +d.longitude], {
+      fillcolor: "blue",
+      color: "blue",
+      weight: 0.5,
+      //radius: 500
+    }).bindPopup("<h3>" + d.name + "</h3>");
     restaurantMarker.on({
       click: function(event) {
         var restaurantInfo = document.getElementById('restaurantinfo');
@@ -47,12 +29,42 @@ function addRestaurantMarkers() {
         var restaurantName = document.getElementById('restaurantname');
         restaurantName.innerHTML = d.name;
         sidebar.open('home');
-      }
-    });
-    restaurantMarker.bindPopup("<h3>" + d.name + "</h3><h4>" + d.loopcheck  + "</h4>");
-    restaurantMarker.addTo(map);
-    //updateSidebarData();
-  })
+        }
+      }).addTo(markers);
+  });
+  createMap(markers);
+}
+
+function createMap(markers) {
+  // define map tile layer and add to the map
+var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+  maxZoom: 18,
+  id: "mapbox.streets",
+  accessToken: API_KEY
+  });
+var darkmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+  maxZoom: 18,
+  id: "mapbox.dark",
+  accessToken: API_KEY
+  });
+var baseMaps = {
+  "Street Map": streetmap,
+  "Dark Map" : darkmap
+  };
+var overlayMaps = {
+  Restaurants : markers
+  };
+// define map variable
+var map = L.map('map', {
+  center: [37.96, -91.83],
+  zoom: 7,
+  layers: [streetmap, markers]
+  });
+L.control.layers(baseMaps, overlayMaps, {
+  collapsed: false
+}).addTo(map)
 }
 
 
