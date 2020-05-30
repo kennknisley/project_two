@@ -59,6 +59,8 @@ function createMap(counties) {
     L.control.layers(baseMaps, overlayMaps, {
       collapsed: false
     }).addTo(map);
+    
+   
 
     var legend = L.control({ position: "bottomright" });
     legend.onAdd = function() {
