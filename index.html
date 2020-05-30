@@ -31,7 +31,8 @@
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
         <ul role="tablist"> <!-- top aligned tabs -->
-            <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+            <li><a href="#restaurant" role="tab"><i class="fa fa-bars"></i></a></li>
+            <li><a href="#county" role="tab"><i class="fa fa-home"></i></a></li>
         </ul>
  
         <ul role="tablist"> <!-- bottom aligned tabs -->
@@ -41,13 +42,19 @@
  
     <!-- Tab panes -->
     <div class="leaflet-sidebar-content">
-        <div class="leaflet-sidebar-pane" id="home">
+        <div class="leaflet-sidebar-pane" id="restaurant">
             <h1 class="leaflet-sidebar-header">
                 <span id='restaurantname'></span>
                 <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
             </h1>
             <p id="restaurantinfo"></p>
         </div>
+        <div class="leaflet-sidebar-pane" id="county">
+          <h1 class="leaflet-sidebar-header">
+              <span id='countyname'></span>
+              <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+          </h1>
+      </div>
     </div>
 </div>
 
@@ -58,6 +65,6 @@
   <script type="text/javascript" src="config.js"></script>
 
   <!-- Our JS -->
-  <script type="text/javascript" src="logic.js"></script>
+  <script type="text/javascript" src="logic_combined_final.js"></script>
 </body>
 </html>
