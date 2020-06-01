@@ -63,17 +63,23 @@ def facts():
 
     return render_template("facts.html", allInfo=allInfo)
 
-@app.route("/map")
+@app.route("/mapping")
 def map():
     
 
-    return render_template("index2.html", allInfo=allInfo)
+    return render_template("mapping.html", allInfo=allInfo)
 
 @app.route("/Graphs")
 def Graphs():
     
 
     return render_template("Graphs.html", allInfo=allInfo)
+
+@app.route("/overview")
+def overview():
+    
+
+    return render_template("overview.html", allInfo=allInfo)
 
 
 
