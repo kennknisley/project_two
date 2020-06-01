@@ -170,12 +170,6 @@ d3.csv("../Resources/mo_data.csv").then(function(data, err){
     lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n*sum_xx - sum_x * sum_x);
     lr['intercept'] = (sum_y - lr.slope * sum_x)/n;
     lr['r2'] = Math.pow((n*sum_xy - sum_x*sum_y)/Math.sqrt((n*sum_xx-sum_x*sum_x)*(n*sum_yy-sum_y*sum_y)),2);
-    var x1=4;
-    var y1=lr['slope']*x1+lr['intercept'];
-    var x2=29;
-    var y2=lr['slope']*x2+lr['intercept'];
-    var line=d3.line()
-        .x(x1,x2)
-        .y(y1,y2)
+    
     return lr;
 }
