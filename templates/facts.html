@@ -4,9 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Facts</title>
-  <link rel="stylesheet" href="reset.css">
-  <link rel="stylesheet" href="pharm_website.css">
-  <title>Bootstrap Components</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin=""/>
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+\  <script src="https://cdnjs.cloudflare.com/ajax/libs/regression/1.4.0/regression.min.js"></script>
+  <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
@@ -15,78 +19,64 @@
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href='#'>
-            <img src='Three-Musketeers-logo1.png' width="150" height="150" class="d-inline-block align-middle">
-            <!-- optional team name -->
+            <img src='../images/Three-Musketeers-logo1.png' width="150" height="150" class="d-inline-block align-middle">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            <li>
+              <a class="nav-link" href="index.html">Home</a>
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="home.html">Data</a>
-            </li> -->
-            <li class="nav-item dropdown">
+      
+             
+            <li class="nav-item dropdown nav-item active">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Project Data and Findngs
+                Data and Findngs
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="mapping.html">Mapping</a>
+                <a class="dropdown-item" href="maps.html">Mapping</a>
                 <a class="dropdown-item" href="Graphs.html">Graphs</a>
                 <a class="dropdown-item" href="Findings.html">Findings</a>
-                <a class="dropdown-item" href="facts.html">Facts</a>
+                <a class="dropdown-item" href="facts.html"><b>Facts</b></a>
                 <a class="dropdown-item" href="overview.html">Overview</a>
               </div>
             </li>
           </ul>
         </div>
       </nav>
-
     <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h3>Facts Related to Poverty and Fast Food Locations</h3>
-            <p>Scraped Data from Brett.</p>
-          </div>
+            
         </div>
-        <!-- <div class="row">
-          <div class="col-md-6">
-              <img id="total_treatments" src="total_treatments.png" width="450px" alt="total_treatments">
-          </div>
-        
-        
-            <div class="col-md-6">
-                <img id="male_female" src="male_female.png" width="450px" alt="male_female">
-            </div>
-        </div>
-        <hr size="30">
-
-        <div class="row">
-            <div class="col-md-2">
-               
-                <a href="top_drugs.html"><img src="total_treatments.png" alt="total_treatments" class="img-thumbnail"></a>
-            </div>
-            <div class="col-md-2">
-                <a href="top_drugs.html"><img src="male_female.png" alt="male_female" class="img-thumbnail"></a>
-            </div>
-            <div class="col-md-2">
-                <a href="top_four.html"><img src="top_four_volumes.png" alt="top_four" class="img-thumbnail"></a>
-            </div>
-            <div class="col-md-2">
-                <a href="cap.html"><img src="weight_vs_volume.png" alt="weight_vs_volume" class="img-thumbnail"></a>
-            </div>
-            <div class="col-md-2">
-                <a href="cap.html"><img src="cap_volume.png" alt="cap_volume" class="img-thumbnail"></a>
-            </div>
-
-        </div> -->
+    
   </div>
+  <br>
+
+  <h4>Facts</h4>
+  <hr>
+  <ul>
+    <li>Poverty does not strike all demographics equally. For example, in 2018, 10.6% of men, and 12.9% of women lived in Poverty USA. Along the same lines, the poverty rate for married couples in 2018 was only 4.7% - but the poverty rate for single-parent families with no wife present was 12.7%, and for single-parent families with no husband present was 24.9%.</li>
+    <li>In 2018, the poverty rate for people living with a disability was 25.7%. That’s nearly 4 million people living with a disability—in poverty.</li>
+    <li>In 2018, 16.2% of all children (11.9 million kids) lived in Poverty USA—that’s almost 1 in every 6 children.</li>
+    <li>In 2015, the National Center on Family Homelessness analyzed state-level data and found that nationwide, 2.5 million children experience homelessness in a year.</li>
+    <li>Though the official census data gives seniors a 2018 poverty rate of only 9.7%, the Supplemental Poverty Measure, which accounts for expenses such as the rising costs of health care, raises the senior poverty rate to 14.1%.</li>
+    <li>According to 2018 US Census Data, the highest poverty rate by race is found among Native Americans (25.4%), with Blacks (20.8%) having the second highest poverty rate, and\xa0Hispanics (of any race) having the third\xa0highest poverty rate (17.6%). Whites had a poverty rate of 10.1%, while Asians had a poverty rate at 10.1%.</li>
+    <li>Poverty thresholds are determined by the US government, and vary according to the size of a family, and the ages of its members. In 2018, the poverty threshold—also known as the poverty line—for an individual was $12,784. For two people, the weighted average threshold was $16,247.</li>
+  </ul>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+  crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+  crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+      
+</body>
 
 
+</html>
   
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

@@ -94,7 +94,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
     return circlesGroup;
     }
 
-d3.csv("Resources/mo_data.csv").then(function(data, err){
+d3.csv("../Resources/mo_data.csv").then(function(data, err){
     if (err) throw err;
     data.forEach(function(data){
         data.UnemploymentRate= +data.UnemploymentRate;

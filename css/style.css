@@ -3,6 +3,61 @@ body {
   padding: 0;
   margin: 0;
 }
+.container h1 {
+  padding-top: 30px;
+  color: rgb(172, 127, 44);
+  font-style: normal;
+  text-align: left;
+}
+
+.container h3 {
+    padding-top: 10px;
+    color: rgb(172, 127, 44)
+}
+
+.container h4 {
+    padding-top: 10px;
+    
+    color: rgb(172, 127, 44)
+
+}
+.footer{
+  font-size:12px;
+}
+
+.post {
+  margin-top: 40px;
+  margin-right: 100px;
+  margin-left: 25px;
+}
+.line {
+  fill: none;
+  stroke: black;
+  stroke-width: 3px;
+}
+h2{
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .navbar li a {
+    size: 10 px;
+    text-align: right;
+  } 
+  .navbar li {
+    display: inline-flex;
+    padding: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    background: rgb(195, 204, 245);
+    border-radius: 3px;
+    text-align: right;
+    
+  }
+  .post {
+    margin-top: 30px;
+  }
 
 /* set map, body, and html to 100% of the screen size */
 #map,

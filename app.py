@@ -14,7 +14,6 @@ import requests
 import pymongo
 from splinter import Browser
 import json
-import plotly.express as px
 import pprint
 import requests
 import sys
