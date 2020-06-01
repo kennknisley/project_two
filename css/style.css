@@ -48,3 +48,11 @@ html {
 h2{
   text-align: center;
 }
+.line {
+  fill: none;
+  stroke: black;
+  stroke-width: 3px;
+}
+h4{
+  padding-left: 30px;
+}

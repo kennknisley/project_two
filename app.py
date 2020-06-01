@@ -14,25 +14,14 @@ import pymongo
 from splinter import Browser
 import json
 import plotly.express as px
+import pprint
+import requests
+import sys
+import urllib
+from config import yelp_key
 
-# poverty_file='Resources/poverty.csv'
-# poverty_df=pd.read_csv(poverty_file)
-# narrowed_poverty_df=poverty_df[['Year', 'State', 'County ID', 'State / County Name','All Ages in Poverty Count', 'All Ages in Poverty Percent']]
-# unemp_file="Resources/unemployment.csv"
-# unemp_df=pd.read_csv(unemp_file)
-# narrowed_unemp=unemp_df[['County ID','Labor Force','Employed','Unemployed','Unemployment Rate(%)']]
-# combined_df=narrowed_poverty_df.merge(narrowed_unemp,how='outer', on='County ID')
-# mo=combined_df[combined_df['State']==29]
-# mo=mo.reset_index(drop=True)
-# mo=mo.rename(columns={'Unemployment Rate(%)':'Unemployment Rate'})
-mo_data='Resources/mo_data.csv'
-# mo.to_csv(mo_data)
-mo=pd.read_csv(mo_data)
-mo=mo.drop(mo.columns[[0]], axis = 1)
-
-rds_connection_string = "postgres:postgres@localhost:5433/ProjectTwoDB"
-engine = create_engine(f'postgresql://{rds_connection_string}')
-mo.to_sql(name = "poverty_data", con = engine, if_exists='append', index = True)
+allInfo={}
+   
 
 def init_browser(): 
     executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
@@ -50,18 +39,35 @@ def updateFacts():
     for x in range(2,12):
         if (len(paragraphs[x].text)>2):
             fact=paragraphs[x]
-            facts_dict[f'Fact_{x}']=fact   
-    return facts_dict
+            facts_dict[f'Fact_{x}']=fact
+    browser.quit()
+    allInfo['Facts']=facts_dict
+
+    return allInfo
+
 
 app=Flask(__name__)
-
+mongo = PyMongo(app, uri="mongodb://localhost:27017/ProjectTwoDB")
 
 @app.route("/")
 def index():
-    allInfo=pd.read_sql_query('select * from poverty_data', con = engine)
+
+
     return render_template("index.html", allInfo=allInfo)
 
 
+@app.route("/facts")
+def facts():
+
+    allInfo=mongo.db.allInfo.find_one()
+
+    return render_template("facts.html", allInfo=allInfo)
+
+@app.route("/map")
+def map():
+    
+
+    return render_template("index2.html", allInfo=allInfo)
 
 
 
