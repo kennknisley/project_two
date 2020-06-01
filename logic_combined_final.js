@@ -59,6 +59,33 @@ d3.csv("cleaned_restaurant_data_2.csv").then(function(csv) {
       }
     }
   }
+  // function for legend colors based on unemployment
+  function legendColor(unemp){
+    if (unemp >22){
+      return "#a50026"
+    }
+    else if (unemp>19){
+      return "#d3322b"
+    }
+    else if (unemp>16){
+      return "#f16d43"
+    }
+    else if (unemp>14){
+      return "#fcab63"
+    }
+    else if (unemp>12){
+      return "#fedc8c"
+    }
+    else if (unemp>10){
+      return "#d7ee8e"
+    }
+    else if (unemp>8){
+      return "#64bc61"
+    }
+    else{
+      return "#23964f"
+    };
+  }
   // create the county lines
   function createMarkers(response) {
     var stations = response.features;
@@ -90,9 +117,22 @@ d3.csv("cleaned_restaurant_data_2.csv").then(function(csv) {
             layer.bindPopup(`<h4>${station.properties.NAME} County</h4>`);
             layer.on({
               click: function(event) {
-                var unemploymentInfo = document.getElementById('countyname');
-                console.log(station);
-                unemploymentInfo.innerHTML = station.properties.NAME;
+                var countyName = document.getElementById('countyname');
+                countyName.innerHTML = station.properties.NAME
+                var record = getMoDataByCountyName(station.properties.NAME);
+                //console.log(record);
+                var year = document.getElementById('year');
+                year.innerHTML  = record.Year;
+                var laborForce = document.getElementById('laborforce');
+                laborForce.innerHTML = record.LaborForce;
+                var employed = document.getElementById('employed');
+                employed.innerHTML = record.Employed;
+                var unemployed = document.getElementById('unemployed');
+                unemployed.innerHTML = record.Unemployed;
+                var allPovertyCount = document.getElementById('allagesinpovertycount');
+                allPovertyCount.innerHTML = record['All AgesinPovertyCount'];
+                var allAgesinPovertyPercent = document.getElementById('allagesinpovertypercent');
+                allAgesinPovertyPercent.innerHTML = record.AllAgesinPovertyPercent;
                 sidebar.open('county');
               }
             });
@@ -100,15 +140,22 @@ d3.csv("cleaned_restaurant_data_2.csv").then(function(csv) {
           });
       countyMarkers.push(countyMarker);
       });
-    return L.layerGroup(countyMarkers);
+      var countyLayerGroup = L.layerGroup(countyMarkers);
+      return countyLayerGroup;
+    // return L.layerGroup(countyMarkers);
     }
+// get dynamic county employment info for sidebar
 function getMoDataByCountyName(countyName) {
+  //console.log(countyName);
+  var countyRecord;
   mo_data_csv.forEach(function(record){
-    console.log(countyName);
-    console.log(record);
+    if(countyName == record.County.substring(0, record.County.length-12)) {
+      return countyRecord = record;
+    }
   });
+  return countyRecord;
+  //return 'Unable to find county info';
 }
-
 // function to add markers, popups, and sidebar info
 function createFeatures() {
   var markers = L.layerGroup();
@@ -156,6 +203,18 @@ function createMap(restaurantMarkers, countyMarkers) {
     Restaurants : restaurantMarkers,
     Counties : countyMarkers
     };
+
+    countyMarkers.on({
+      remove : function(event){
+          var legend = document.getElementById('countylegend');
+          legend.style = 'display:none;'
+      },
+      add : function(event){
+        var legend = document.getElementById('countylegend');
+        legend.style = ''
+      }
+    });
+
   // define map with center, zoom level and layers
   var map = L.map('map', {
     center: [37.96, -91.83],
@@ -166,13 +225,36 @@ function createMap(restaurantMarkers, countyMarkers) {
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
     }).addTo(map)
-  // create sidebar
+  // add sidebar to map
   sidebar = L.control.sidebar({
     autopan: false,
     closeButton: true,
     container: 'sidebar',
     position: 'left'
   }).addTo(map);
+  // add legend to map
+  var legend = L.control({ position: "bottomright" });
+    legend.onAdd = function() {
+    var div = L.DomUtil.create("div", "info legend");
+    div.id = 'countylegend';
+    div.style = 'display:none;';
+    var rates = [0,3,6,11,13,15,17,19,21,23,25];
+    var labels = [];
+    var legendInfo = "<h3>Unemployment Rate</h3>" +
+      "<div class=\"labels\">" +
+        "<div class=\"min\">" + rates[0] + "</div>" +
+        "<div class=\"middle\">" + rates[5] + "</div>" +
+        "<div class=\"max\">" + rates[rates.length - 1] + "+" + "</div>" +
+      "</div>";
+    div.innerHTML = legendInfo;
+    rates.forEach(function(rate, index) {
+      labels.push("<li style=\"background-color: " + legendColor(rates[index]) + "\"></li>");
+    });
+    div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+    return div;
+  };
+
+  legend.addTo(map);
 }
 
 
