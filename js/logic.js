@@ -114,7 +114,7 @@ d3.csv("../Resources/cleaned_restaurant_data_2.csv").then(function(csv) {
                   });
                 }
               });
-            layer.bindPopup(`<h4>${station.properties.NAME} County</h4>`);
+            layer.bindPopup(`<h6>${station.properties.NAME} County</h6>`);
             layer.on({
               click: function(event) {
                 var countyName = document.getElementById('countyname');
@@ -166,7 +166,7 @@ function createFeatures() {
       color: "blue",
       weight: 0.5,
       radius: 5
-    }).bindPopup("<h3>" + d.name + "</h3>");
+    }).bindPopup("<h6>" + d.name + "</h6>");
     // create info for the sidebar
     restaurantMarker.on({
       click: function(event) {

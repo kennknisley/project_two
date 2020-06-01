@@ -21,6 +21,7 @@ body {
     color: rgb(172, 127, 44)
 
 }
+
 .footer{
   font-size:12px;
 }
@@ -57,7 +58,9 @@ h2{
   }
   .post {
     margin-top: 30px;
+  
   }
+  
 
 /* set map, body, and html to 100% of the screen size */
 #map,
@@ -301,4 +304,4 @@ h3{
     right: 470px; } }
 
 .leaflet-sidebar-right.collapsed ~ .leaflet-control-container .leaflet-right {
-  right: 50px; }
+  right: 50px; }}

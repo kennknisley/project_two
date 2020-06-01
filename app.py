@@ -6,7 +6,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func, inspect
 from flask import Flask, jsonify, redirect, render_template
-from flask_pymongo import Pymongo
+from flask_pymongo import PyMongo
 import pandas as pd
 import os
 from bs4 import BeautifulSoup as bs
@@ -59,7 +59,7 @@ def index():
 @app.route("/facts")
 def facts():
 
-    allInfo=mongo.db.allInfo.find_one()
+    allInfo=mongo.db.facts.find_one()
 
     return render_template("facts.html", allInfo=allInfo)
 
@@ -68,6 +68,12 @@ def map():
     
 
     return render_template("index2.html", allInfo=allInfo)
+
+@app.route("/Graphs")
+def Graphs():
+    
+
+    return render_template("Graphs.html", allInfo=allInfo)
 
 
 
