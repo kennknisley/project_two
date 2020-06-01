@@ -5,7 +5,8 @@ import numpy as np
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func, inspect
-from flask import Flask, jsonify
+from flask import Flask, jsonify, redirect, render_template
+from flask_pymongo import Pymongo
 import pandas as pd
 import os
 from bs4 import BeautifulSoup as bs
@@ -18,7 +19,7 @@ import pprint
 import requests
 import sys
 import urllib
-from config import yelp_key
+
 
 allInfo={}
    
