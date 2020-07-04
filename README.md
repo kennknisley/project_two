@@ -1,1 +1,1 @@
-# project_two
+This Project looked at the correlation between Fast Food and Poverty. D3 was used to plot the graphs. Then JavaScript plug-ins were used to build an interactive map that is color coded, and has many more features. 
